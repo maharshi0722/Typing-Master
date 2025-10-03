@@ -1,103 +1,93 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import TypingGame from "../components/TypingGame";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [step, setStep] = useState(1);
+  const [username, setUsername] = useState("");
+  const [timer, setTimer] = useState(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const handleUsernameSubmit = (e) => {
+    e.preventDefault();
+    if (!username.trim()) return;
+    setStep(2);
+  };
+
+  const handleStartTyping = () => setStep(3);
+  const handleBack = () => setStep(1);
+
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 flex flex-col items-center justify-center p-6 space-y-10 font-inter">
+      
+      <h1 className="text-5xl sm:text-6xl font-extrabold text-white text-center drop-shadow-xl animate-[fadeIn_1.5s_ease-in-out]">
+        Sentient AGI Typing Challenge
+      </h1>
+
+      {step === 1 && (
+        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col gap-6 animate-[fadeInUp_1.2s_ease-out]">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center">
+            Enter Your Username
+          </h2>
+          <form onSubmit={handleUsernameSubmit} className="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="Enter your username..."
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white text-lg transition-shadow shadow-md"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <button
+              type="submit"
+              className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:scale-105 transform transition-all font-bold text-lg shadow-lg"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      )}
+
+      {step === 2 && (
+        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 text-center animate-[fadeInUp_1.2s_ease-out] flex flex-col items-center gap-6">
+          <img
+            src={`https://pbs.twimg.com/profile_images/1859727094789660672/h7RM1LNu_400x400.jpg`}
+            alt={username}
+            className="w-32 h-32 rounded-full shadow-xl border-4 border-white dark:border-gray-600 animate-[pulse_2s_ease-in-out_infinite]"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{username}</h2>
+          <p className="text-gray-700 dark:text-gray-300">Select your timer:</p>
+          <div className="flex justify-center gap-4 mt-2 flex-wrap">
+            {[15, 30, 45, 60].map((t) => (
+              <button
+                key={t}
+                onClick={() => setTimer(t)}
+                className={`px-5 py-2 rounded-xl font-bold transition-all duration-300 ${
+                  timer === t
+                    ? "bg-green-500 text-white shadow-lg scale-105 transform"
+                    : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105 transform"
+                }`}
+              >
+                {t}s
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={handleStartTyping}
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:scale-105 transform transition font-bold shadow-md"
+            >
+              Start Typing
+            </button>
+            <button
+              onClick={handleBack}
+              className="px-6 py-3 bg-gray-400 text-white rounded-xl hover:scale-105 transform transition font-bold shadow-md"
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && <TypingGame username={username} timeLimit={timer} onBack={handleBack} />}
     </div>
   );
 }
