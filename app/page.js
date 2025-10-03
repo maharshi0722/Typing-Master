@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import TypingGame from "../components/TypingGame";
+import TypingGame from "../components/typinggame";
+
 
 export default function Home() {
   const [step, setStep] = useState(1);
