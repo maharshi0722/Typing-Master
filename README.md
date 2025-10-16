@@ -10,14 +10,14 @@ It’s not instant text rendering — it’s a deliberate, lifelike typing exper
 - ⌨️ Real-time typing simulation  
 - 🧠 “Thinking” delay before each output for realism  
 - 🎨 Smooth animations using Tailwind CSS  
-- 💡 Built with **Next.js 14 (App Router)**  
-- ⚡ No backend, no state manager — 100% client-side logic  
+- 💡 Built with **Next.js 15 (App Router)**  
+- ⚡ No backend, no state manager - 100% client-side logic  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14  
+- **Framework:** Next.js 15
 - **Styling:** Tailwind CSS  
 - **Language:** JavaScript / TypeScript  
 - **Hosting:** Vercel (recommended)  
